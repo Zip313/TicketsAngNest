@@ -1,0 +1,30 @@
+
+<div class="h-100 overflow-auto">
+  <div class="search_block">
+    <ng-container *ngIf="tickets">
+      <p>Всего туров {{ticketsCount}}</p>
+      <p>Найдено туров {{ticketsFilteredCount}}</p>
+      <div>Текущий элемент: {{blockDirective.activeElementIndex}} </div>
+    </ng-container>
+    <input #ticketSearchInput [(ngModel)]="searchText" type="text" pInputText   />
+  </div>
+<!--  (input)="handleSearchTickets($event)"-->
+  <div
+       appBlocksStyle
+       #tourWrap
+       #blockDirective = 'blocksStyle'
+
+       (renderComplete)="directiveRenderComplete($event)"
+       class = "d-flex flex-wrap justify-content-around"
+       [selector]="'.ticket-item'"
+       [initFirst]="true"
+  >
+
+    <div class="m-2"
+         [id]="'ticket_'+i"
+         (click)="goToTicketInfoPage(ticket)"
+         *ngFor="let ticket of ticketsCopy; let i = index">
+      <app-ticket-list-item [ticket]="ticket"></app-ticket-list-item>
+    </div>
+  </div>
+</div>

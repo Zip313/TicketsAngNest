@@ -1,0 +1,89 @@
+<form  #form="ngForm" (ngSubmit)="sendForm(form)">
+  <div class="d-flex flex-column col-8 m-auto registration-input-wrap">
+    <div>
+      <span class="mx-3">Login</span>
+      <input type="text"
+             class="pi-phone"
+             pInputText
+             autocomplete="login"
+             [ngClass]="{'input-error': !login}"
+             #login="ngModel"
+             ngModel
+             name="login"/>
+    </div>
+    <div>
+      <span class="mx-3">Password</span>
+      <input class="mt-3 "
+             type="password"
+             pInputText
+             [ngClass]="{'input-error': !psw}"
+             #psw="ngModel"
+             ngModel
+             name="psw"/>
+    </div>
+
+    <div >
+      <span class="mx-3">Подтверждение пароля</span>
+      <input type="password"
+             class="mt-3"
+             pInputText
+             [ngClass]="{'input-error': !pswRepeat}"
+             #pswRepeat="ngModel"
+             ngModel
+             name="pswRepeat"/>
+    </div>
+    <div >
+      <span class="mx-3">Email</span>
+      <input type="text"
+             class="mt-3"
+             pInputText
+             autocomplete="email"
+             #email="ngModel"
+             ngModel
+             name="email"/>
+    </div>
+    <div *ngIf="showCardNumber; else noSelected ">
+      <span class="mx-3">Номер карты</span>
+      <input type="text"
+             class="mt-3"
+             pInputText
+             #cardNumber="ngModel"
+             ngModel
+             name="cardNumber"/>
+    </div>
+
+
+    <ng-template #noSelected>
+      <p>Карта не выбрана</p>
+    </ng-template>
+
+
+
+
+  </div>
+
+  <div class="mt-5 d-flex justify-content-center">
+    <button class="btn btn-primary"
+            [disabled]="!login || !psw || !pswRepeat"
+            >
+      Регистрация
+    </button>
+  </div>
+</form>
+<div>
+
+
+</div>
+
+<p-checkbox label="Сохранить пользователя в локальном хранилище"
+            [(ngModel)]="isNeedSaveToLocalStorage"
+            [binary]="true" >
+</p-checkbox>
+
+<div class="mt-5 d-flex justify-content-center">
+  <button class="btn btn-primary"
+          (click)="removeUsersFromLocalStorage($event)"
+          type="button">
+    Очистить пользователей хранилища
+  </button>
+</div>
